@@ -58,7 +58,6 @@ services:
       - mariadb_data:/var/lib/mysql         # access database
       - ${APPDATA_PATH}/phpgl/backup:/backup           # host backup folder
     entrypoint: /bin/sh
-    entrypoint: /bin/sh
     command: -c "
       echo 'Waiting for MariaDB to be ready...';
       until mysql -h mariadb-phpgl -u root -p$MYSQL_ROOT_PASSWORD -e 'SELECT 1'; do
