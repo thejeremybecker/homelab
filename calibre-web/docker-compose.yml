@@ -4,14 +4,13 @@ services:
     image: lscr.io/linuxserver/calibre-web:latest
     container_name: calibre-web
     environment:
-      - PUID=1001
-      - PGID=100
-      - TZ=America/Chicago
-      # - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
     volumes:
-      - /srv/dev-disk-by-uuid-5eafbb0f-6dcc-4b9e-a9cf-cc2f236ad978/1TB/Appdata/calibre-web:/config
-      - /srv/dev-disk-by-uuid-5eafbb0f-6dcc-4b9e-a9cf-cc2f236ad978/1TB/calibre-web:/books
+      - ${APPDATA_PATH}/calibre-web:/config
+      - ${APPDATA_PATH}/calibre-web:/books
     ports:
       - 8085:8083
     restart: unless-stopped
