@@ -30,7 +30,6 @@ services:
       - ${APPDATA_PATH}/phpgl/mysql/config:/etc/mysql
       - ${APPDATA_PATH}/phpgl/mysql/mysql_logs:/var/log
       - ${APPDATA_PATH}/phpgl/mysql/data:/var/lib/mysql
-      - ${MYSQL_INIT_PATH}:/docker-entrypoint-initdb.d:ro
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: phpgl
