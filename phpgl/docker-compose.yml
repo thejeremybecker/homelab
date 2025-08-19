@@ -48,6 +48,23 @@ services:
     depends_on:
       - mariadb-phpgl
     container_name: phpmyadmin
+
+ mariadb-backup:
+    image: mariadb:10.5
+    container_name: mariadb-backup
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql         # access database
+      - ${APPDATA_PATH}/phpgl/backup:/backup           # host backup folder
+    entrypoint: /bin/sh
+    command: -c "while true; do \
+                  mysqldump -h mariadb-phpgl -u root -p$MYSQL_ROOT_PASSWORD phpgl > /backup/phpgl_$(date +'%Y%m%d_%H%M').sql; \
+                  sleep 86400; \
+                done"
+    depends_on:
+      - mariadb-phpgl
+    restart: unless-stopped
     
 volumes:
   mariadb_data:
