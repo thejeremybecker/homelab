@@ -49,7 +49,7 @@ services:
       - mariadb-phpgl
     container_name: phpmyadmin
 
- mariadb-backup:
+  mariadb-backup:
     image: mariadb:10.5
     container_name: mariadb-backup
     environment:
