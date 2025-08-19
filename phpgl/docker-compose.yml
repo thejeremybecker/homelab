@@ -68,8 +68,7 @@ services:
       while true; do
         mysqldump -h mariadb-phpgl -u root -p$MYSQL_ROOT_PASSWORD phpgl > /backup/phpgl_$(date +'%Y%m%d_%H%M').sql;
         sleep 86400;
-      done
-    "
+      done"
     depends_on:
       - mariadb-phpgl
     restart: unless-stopped
