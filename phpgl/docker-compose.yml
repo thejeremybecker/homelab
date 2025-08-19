@@ -51,3 +51,7 @@ services:
     
 volumes:
   mariadb_data:
+
+networks:
+  phpgl_network:
+    external: true
