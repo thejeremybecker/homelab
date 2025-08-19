@@ -54,4 +54,5 @@ volumes:
 
 networks:
   phpgl_network:
-    external: true
+    external: 
+      name: phpgl_default
