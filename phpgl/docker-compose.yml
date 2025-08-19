@@ -1,7 +1,8 @@
-version: '2.1'
+version: '3.8'
 services:
   apache2-phpgl:
     image: mchauvel/php-pdo-mysql
+    container_name: apache2-phpgl
     ports:
       - "8083:80"
     volumes:
@@ -10,43 +11,42 @@ services:
       - ${APPDATA_PATH}/phpgl/apache2/php5/cli/php.ini:/etc/php5/cli/php.ini
       - ${APPDATA_PATH}/phpgl/apache2/apache_logs:/var/log/apache2
     links:
-      - mysql-phpgl
+      - mariadb-phpgl
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
     restart: always
-    container_name: apache2-phpgl
     depends_on:
-      - mysql-phpgl
+      - mariadb-phpgl
 
-  mysql-phpgl:
-    image: mysql:5.5
+  mariadb-phpgl:
+    image: mariadb:10.5
+    container_name: mariadb-phpgl
     expose:
       - "3306"
     ports:
       - "3306:3306"  
     volumes:
-      - ${APPDATA_PATH}/phpgl/mysql/config:/etc/mysql
-      - ${APPDATA_PATH}/phpgl/mysql/mysql_logs:/var/log
-      - ${APPDATA_PATH}/phpgl/mysql/data:/var/lib/mysql
+      - ${APPDATA_PATH}/phpgl/mariadb/config:/etc/mysql
+      - ${APPDATA_PATH}/phpgl/mariadb/logs:/var/log
+      - ${APPDATA_PATH}/phpgl/mariadb/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: phpgl
       MYSQL_USER: pygl
       MYSQL_PASSWORD: ${PYGL_PASSWORD}  
     restart: always
-    container_name: mysql-phpgl
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
-      - mysql-phpgl
+      - mariadb-phpgl
     ports:
       - "9001:80"
     environment:
-      PMA_HOSTS: mysql-phpgl
+      PMA_HOSTS: mariadb-phpgl
     restart: always
     depends_on:
-      - mysql-phpgl
+      - mariadb-phpgl
     container_name: phpmyadmin
