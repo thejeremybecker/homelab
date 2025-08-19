@@ -58,10 +58,18 @@ services:
       - mariadb_data:/var/lib/mysql         # access database
       - ${APPDATA_PATH}/phpgl/backup:/backup           # host backup folder
     entrypoint: /bin/sh
-    command: -c "while true; do \
-                  mysqldump -h mariadb-phpgl -u root -p$MYSQL_ROOT_PASSWORD phpgl > /backup/phpgl_$(date +'%Y%m%d_%H%M').sql; \
-                  sleep 86400; \
-                done"
+    entrypoint: /bin/sh
+    command: -c "
+      echo 'Waiting for MariaDB to be ready...';
+      until mysql -h mariadb-phpgl -u root -p$MYSQL_ROOT_PASSWORD -e 'SELECT 1'; do
+        sleep 5;
+      done;
+      echo 'MariaDB ready. Starting daily backups.';
+      while true; do
+        mysqldump -h mariadb-phpgl -u root -p$MYSQL_ROOT_PASSWORD phpgl > /backup/phpgl_$(date +'%Y%m%d_%H%M').sql;
+        sleep 86400;
+      done
+    "
     depends_on:
       - mariadb-phpgl
     restart: unless-stopped
