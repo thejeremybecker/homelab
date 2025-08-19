@@ -23,7 +23,7 @@ services:
         find /backup -type f -name '*.sql' -mtime +7 -delete;
         sleep 86400;
       done
-    "
+      "
     depends_on:
       - mariadb-phpgl
     restart: unless-stopped
