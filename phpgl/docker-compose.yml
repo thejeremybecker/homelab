@@ -28,9 +28,7 @@ services:
     ports:
       - "3306:3306"  
     volumes:
-      - ${APPDATA_PATH}/phpgl/mariadb/config:/etc/mysql
-      - ${APPDATA_PATH}/phpgl/mariadb/logs:/var/log
-      - ${APPDATA_PATH}/phpgl/mariadb/data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: phpgl
@@ -50,3 +48,6 @@ services:
     depends_on:
       - mariadb-phpgl
     container_name: phpmyadmin
+    
+volumes:
+  mariadb_data:
