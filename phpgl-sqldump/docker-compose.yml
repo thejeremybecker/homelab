@@ -24,8 +24,7 @@ services:
         sleep 86400;
       done
       "
-    depends_on:
-      - mariadb-phpgl
+
     restart: unless-stopped
 
 networks:
