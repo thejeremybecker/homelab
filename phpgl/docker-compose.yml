@@ -33,6 +33,9 @@ services:
       - ${MYSQL_INIT_PATH}:/docker-entrypoint-initdb.d:ro
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: phpgl
+      MYSQL_USER: pygl
+      MYSQL_PASSWORD: ${PYGL_PASSWORD}  
     restart: always
     container_name: mysql-phpgl
 
