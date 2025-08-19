@@ -22,7 +22,6 @@ services:
 
   mysql-phpgl:
     image: mysql:5.5
-    user: "${PUID}:${PGID}"
     expose:
       - "3306"
     ports:
