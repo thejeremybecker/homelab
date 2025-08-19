@@ -12,8 +12,8 @@ services:
     links:
       - mysql-phpgl
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
+      # - PUID=${PUID}
+      # - PGID=${PGID}
       - TZ=${TZ}
     restart: always
     container_name: apache2-phpgl
