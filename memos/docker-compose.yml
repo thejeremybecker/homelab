@@ -1,0 +1,9 @@
+version: "3.0"
+services:
+  memos:
+    image: neosmemo/memos:stable
+    container_name: memos
+    volumes:
+      - /srv/dev-disk-by-uuid-5eafbb0f-6dcc-4b9e-a9cf-cc2f236ad978/1TB/Appdata/memos:/var/opt/memos
+    ports:
+      - 8086:5230
