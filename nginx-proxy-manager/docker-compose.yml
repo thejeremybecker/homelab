@@ -1,0 +1,13 @@
+version: "2"
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80' # Public HTTP Port
+      - '443:443' # Public HTTPS Port
+      - '8088:81' # Admin Web Port
+
+    volumes:
+      - ${APPDATA_PATH}/nginx-proxy-manager/data:/data
+      - ${APPDATA_PATH}/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
