@@ -1,0 +1,9 @@
+version: "2"
+services:
+    client:
+        container_name: nginx-jaaax-net
+        image: nginx
+        ports:
+            - 8089:80
+        volumes:
+            - ${APPDATA_PATH}/nginx-jaaax-net:/usr/share/nginx/html
