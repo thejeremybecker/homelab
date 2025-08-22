@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  urbackup:
+    image: uroni/urbackup-server:latest
+    container_name: urbackup
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}      
+    volumes:
+      - ${APPDATA_PATH}/urbackup:/var/urbackup
+      - ${BACKUP_PATH}:/backups      
+    network_mode: "host"
