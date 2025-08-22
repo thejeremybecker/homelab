@@ -1,0 +1,11 @@
+version: "2"
+
+services:
+    client:
+        container_name: nginx-thejeremybecker-com
+        image: nginx
+        ports:
+            - 8091:80
+        volumes:
+            - ${APPDATA_PATH}/nginx-thejeremybecker-com:/usr/share/nginx/html
+        restart: unless-stopped
