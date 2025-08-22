@@ -1,0 +1,22 @@
+version: '2'
+services:
+  plex:
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - VERSION=latest
+      - UMASK_SET=022
+      - PLEX_CLAIM=
+    volumes:
+      - ${APPDATA_PATH}/plex/config:/config
+      - ${APPDATA_PATH}/Appdata/plex/transcode:/transcode
+      - ${TV_SHOWS}:/tv
+      - ${MOVIES}:/movies
+      - ${MUSIC}:/music
+      - ${PHOTOS}:/photos
+      - ${AUDIOBOOKS}:/audiobooks
+      - ${OTHER_VIDEOS}:/othervideos
+    restart: unless-stopped
+    image: linuxserver/plex
