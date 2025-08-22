@@ -8,7 +8,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}   
     volumes:
-      - ${APPDATA_PATH}/phpgl/backup:/backup                 
+      - ${BACKUP_PATH}/phpgl/backup:/backup                 
     networks:
       - phpgl_network                              
     entrypoint: /bin/sh
