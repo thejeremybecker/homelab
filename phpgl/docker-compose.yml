@@ -16,6 +16,10 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
       - TZ=${TZ}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
     restart: always
     depends_on:
       - mariadb-phpgl
