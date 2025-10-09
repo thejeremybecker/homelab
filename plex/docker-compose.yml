@@ -11,7 +11,7 @@ services:
       - PLEX_CLAIM=
     volumes:
       - ${APPDATA_PATH}/plex/config:/config
-      - ${APPDATA_PATH}/Appdata/plex/transcode:/transcode
+      - ${APPDATA_PATH}/plex/transcode:/transcode
       - ${TV_SHOWS}:/tv
       - ${MOVIES}:/movies
       - ${MUSIC}:/music
