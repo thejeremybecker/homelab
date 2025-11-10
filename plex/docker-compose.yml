@@ -19,4 +19,4 @@ services:
       - ${AUDIOBOOKS}:/audiobooks
       - ${OTHER_VIDEOS}:/othervideos
     restart: unless-stopped
-    image: linuxserver/plex
+    image: linuxserver/plex:1.42.1
