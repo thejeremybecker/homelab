@@ -15,7 +15,7 @@ services:
             - ${DOWNLOAD_PATH}/audio:/app/audio
             - ${DOWNLOAD_PATH}/video:/app/video
         ports:
-            - "8998:17442"
+            - "${HOST_PORT}:17442"
         image: tzahi12345/youtubedl-material:latest
     ytdl-mongo-db:
         image: mongo:4
