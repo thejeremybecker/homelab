@@ -4,7 +4,7 @@ services:
     image: mchauvel/php-pdo-mysql
     container_name: apache2-phpgl
     ports:
-      - "8083:80"
+      - "${HOST_PORT}:80"
     volumes:
       - ${APPDATA_PATH}/phpgl/apache2/html:/var/www/html
       - ${APPDATA_PATH}/phpgl/apache2/php.ini:/etc/php5/apache2/php.ini
