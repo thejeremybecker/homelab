@@ -5,7 +5,7 @@ services:
         container_name: nginx-screenclip-net
         image: nginx
         ports:
-            - 8093:80
+            - ${HOST_PORT}:80
         volumes:
             - ${APPDATA_PATH}/nginx-nginx-screenclip-net:/usr/share/nginx/html
         restart: unless-stopped
