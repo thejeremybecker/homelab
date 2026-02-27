@@ -3,6 +3,6 @@ services:
     image: redimp/otterwiki:2
     restart: unless-stopped
     ports:
-      - 8100:80
+      - ${HOST_PORT}:80
     volumes:
       - ${APPDATA_PATH}/otter-wiki:/app-data
