@@ -6,4 +6,4 @@ services:
     volumes:
       - ${APPDATA_PATH}/memos:/var/opt/memos
     ports:
-      - 8086:5230
+      - ${HOST_PORT}:5230
