@@ -12,5 +12,5 @@ services:
       - ${APPDATA_PATH}/calibre-web:/config
       - ${BOOK_LIBRARY}:/books
     ports:
-      - 8085:8083
+      - ${HOST_PORT}:8083
     restart: unless-stopped
