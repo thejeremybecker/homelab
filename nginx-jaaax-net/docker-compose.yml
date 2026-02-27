@@ -4,6 +4,6 @@ services:
         container_name: nginx-jaaax-net
         image: nginx
         ports:
-            - 8089:80
+            - ${HOST_PORT}:80
         volumes:
             - ${APPDATA_PATH}/nginx-jaaax-net:/usr/share/nginx/html
