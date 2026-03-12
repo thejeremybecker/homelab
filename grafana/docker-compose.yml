@@ -1,0 +1,15 @@
+services:
+  grafana:
+    image: grafana/grafana-enterprise
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+      - GF_SERVER_ROOT_URL=${SERVER_ROOT_URL}
+      - GF_PLUGINS_PREINSTALL=${PLUGINS}
+    ports:
+      - '${HOST_PORT}:3000'
+    volumes:
+      - '${APPDATA_PATH}/grafana:/var/lib/grafana'
+    user: ${PUID} # Create the folder above (as user) before running the container, otherwise it will be created with root permissions
+volumes:
+  grafana_storage: {}
