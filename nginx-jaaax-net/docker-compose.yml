@@ -7,3 +7,4 @@ services:
             - ${HOST_PORT}:80
         volumes:
             - ${APPDATA_PATH}/nginx-jaaax-net:/usr/share/nginx/html
+        restart: unless-stopped
