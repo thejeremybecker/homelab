@@ -1,27 +1,12 @@
-version: "2"
 services:
-    ytdl_material:
-        environment: 
-            ytdl_mongodb_connection_string: 'mongodb://ytdl-mongo-db:27017'
-            ytdl_use_local_db: 'false'
-            write_ytdl_config: 'true'
-        restart: always
-        depends_on:
-            - ytdl-mongo-db
-        volumes:
-            - ${APPDATA_PATH}/youtube-dl/appdata:/app/appdata
-            - ${APPDATA_PATH}/youtube-dl/subscriptions:/app/subscriptions
-            - ${APPDATA_PATH}/youtube-dl/users:/app/users
-            - ${DOWNLOAD_PATH}/audio:/app/audio
-            - ${DOWNLOAD_PATH}/video:/app/video
-        ports:
-            - "${HOST_PORT}:17442"
-        image: tzahi12345/youtubedl-material:latest
-    ytdl-mongo-db:
-        image: mongo:4
-        logging:
-            driver: "none"          
-        container_name: mongo-db
-        restart: always
-        volumes:
-            - ./db/:/data/db
+  yt-dlp-webui-xbuild:
+    image: ruseler/yt-dlp-webui-xbuild:latest
+    environment:
+      - TZ=${TZ}
+    ports:
+      - ${HOST_PORT}:3033
+    volumes:
+      - ${DOWNLOAD_PATH}:/downloads
+    healthcheck:
+      test: curl -f http://localhost:${HOST_PORT} || exit 1
+    restart: unless-stopped
