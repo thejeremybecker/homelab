@@ -8,5 +8,5 @@ services:
     volumes:
       - ${DOWNLOAD_PATH}:/downloads
     healthcheck:
-      test: curl -f http://localhost:${HOST_PORT} || exit 1
+      test: curl -f http://localhost:3033 || exit 1
     restart: unless-stopped
