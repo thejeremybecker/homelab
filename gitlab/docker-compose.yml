@@ -1,0 +1,28 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    hostname: ${HOSTNAME}
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${EXTERNAL_URL}:${EXTERNAL_PORT}'
+        gitlab_rails['gitlab_shell_ssh_port'] = ${SHELL_SSH_PORT}
+        nginx['enable'] = true
+        gitlab_rails['registry_enabled'] = true
+        registry_external_url '${EXTERNAL_URL}:${REGISTRY_PORT}'
+    ports:
+      - ${EXTERNAL_PORT}:8929
+      - ${SHELL_SSH_PORT}:22
+      - ${REGISTRY_PORT}:5050
+    volumes:
+      - ${APPDATA_PATH}/gitlab/gitlab_config:/etc/gitlab
+      - ${APPDATA_PATH}/gitlab/gitlab_logs:/var/log/gitlab
+      - ${APPDATA_PATH}/gitlab/gitlab_data:/var/opt/gitlab
+      - ${APPDATA_PATH}/gitlab/registry_data:/var/opt/gitlab/gitlab-rails/shared/registry
+    shm_size: '256m'
+volumes: 
+  gitlab_config:
+  gitlab_logs:
+  gitlab_data:
+  registry_data:
